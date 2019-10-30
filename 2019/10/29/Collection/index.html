@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java集合," />
 
 
 
@@ -86,14 +86,15 @@
 
 
 
-<meta name="description" content="Stay Hungry, Stay Foolish">
-<meta name="keywords" content="关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Grapeskin">
-<meta property="og:url" content="http:&#x2F;&#x2F;localhost:4000&#x2F;">
+<meta name="description" content="HashMap属性1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F; 默认初始化容量大小 16 （必须是2的幂次方，为什么？）static final int DEFAULT_INITIAL_CAPACITY = 1 &amp;lt;&amp;lt; 4; &#x2F;&#x2F; aka 16&#x2F;&#x2F; 最大容量为2的30次方（必须是2的幂次方，为什么？）st">
+<meta name="keywords" content="Java集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合总结">
+<meta property="og:url" content="http:&#x2F;&#x2F;localhost:4000&#x2F;2019&#x2F;10&#x2F;29&#x2F;Collection&#x2F;">
 <meta property="og:site_name" content="Grapeskin">
-<meta property="og:description" content="Stay Hungry, Stay Foolish">
+<meta property="og:description" content="HashMap属性1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F; 默认初始化容量大小 16 （必须是2的幂次方，为什么？）static final int DEFAULT_INITIAL_CAPACITY = 1 &amp;lt;&amp;lt; 4; &#x2F;&#x2F; aka 16&#x2F;&#x2F; 最大容量为2的30次方（必须是2的幂次方，为什么？）st">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-30T10:47:23.268Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -124,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href="http://localhost:4000/2019/10/29/Collection/"/>
 
 
 
 
 
-  <title>Grapeskin - Stay Hungry, Stay Foolish</title>
+  <title>Java集合总结 | Grapeskin</title>
   
 
 
@@ -149,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 		
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,9 +291,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -323,9 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/29/Collection/" itemprop="url">Java集合总结</a></h1>
+          <h1 class="post-title" itemprop="name headline">Java集合总结</h1>
         
 
         <div class="post-meta">
@@ -368,6 +366,11 @@
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
           
 
           
@@ -420,9 +423,7 @@
       
 
       
-        
-          
-            <a id="more"></a>
+        <a id="more"></a>
 <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 默认初始化容量大小 16 （必须是2的幂次方，为什么？）</span><br><span class="line">static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</span><br><span class="line"></span><br><span class="line">// 最大容量为2的30次方（必须是2的幂次方，为什么？）</span><br><span class="line">static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">// 默认加载因子 （为什么是0.75？）</span><br><span class="line">static final float DEFAULT_LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">// 阈值，当超过这个值时会将链表结构转为红黑树，（为什么是8？）</span><br><span class="line">static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">// 阈值，当小于这个值时会将树结构转为链表结构（为什么是6）</span><br><span class="line">static final int UNTREEIFY_THRESHOLD = 6;</span><br><span class="line"></span><br><span class="line">// 链表结构转为树结构的哈希表最小容量为 4 * TREEIFY_THRESHOLD，（为什么是4倍？）</span><br><span class="line">static final int MIN_TREEIFY_CAPACITY = 64;</span><br><span class="line"></span><br><span class="line">//哈希表，一维数组，每个数组都是一个Node节点，Node上面挂Node形成链表结构，加transient关键字表明此属性在序列化时会忽略</span><br><span class="line">transient Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">//使用迭代器遍历数组元素</span><br><span class="line">transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br><span class="line"></span><br><span class="line">//Key-Value键值对的数目，并不一定等于数组长度</span><br><span class="line">transient int size;</span><br><span class="line"></span><br><span class="line">//Map结构被修改的次数，（有啥用？）【为了防止出现并发修改不一致的情况，Hashmap的快速失败机制，当表结构修改时modCount会+1，在每次修改结构之前都会验证modCount与expectedModCount是否一致，若不一致，则抛出ConcurrentModificationException() 异常】</span><br><span class="line">transient int modCount;</span><br><span class="line"></span><br><span class="line">//决定是否扩容的临界值，超过时扩容，值为当前容量 * 加载因子(capacity * load factor)</span><br><span class="line">int threshold;</span><br><span class="line"></span><br><span class="line">//加载因子</span><br><span class="line">final float loadFactor;</span><br></pre></td></tr></table></figure>
 <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//无参构造使用默认容量16</span><br><span class="line">public HashMap() &#123;</span><br><span class="line">        this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted</span><br><span class="line">&#125;</span><br><span class="line">//使用自定义容量</span><br><span class="line">public HashMap(int initialCapacity) &#123;</span><br><span class="line">        this(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br><span class="line">//使用自定义容量,自定义加载因子</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        //容量超过最大允许容量时，使用最大容量</span><br><span class="line">        if (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">            initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">        //isNaN()（is not a number）方法为了判断loadFactor有意义，即非无穷大，无穷大时返回true, 在数学上0.0 / 0.0为无穷大</span><br><span class="line">        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +</span><br><span class="line">                                               loadFactor);</span><br><span class="line">        this.loadFactor = loadFactor;</span><br><span class="line">        this.threshold = tableSizeFor(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line">//传入一个Map去初始化</span><br><span class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;</span><br><span class="line">        this.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">        putMapEntries(m, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h2><ul>
@@ -439,8 +440,6 @@
 <li>clone</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -448,6 +447,8 @@
     
 	
 	<div>
+ 
+ <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经触及到我的底线&nbsp;&nbsp;<i class="fa fa-paw"></i>&nbsp;&nbsp;非常感谢您的阅读-------------</div>
  
 </div>
 
@@ -461,213 +462,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2019/10/22/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LJY">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Grapeskin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/22/test/" itemprop="url">背影--朱自清</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T11:36:11+08:00">
-                2019-10-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-29T14:04:58+08:00">
-                2019-10-29
-              </time>
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95%E7%9B%AE%E5%BD%95/" itemprop="url" rel="index">
-                    <span itemprop="name">测试目录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Java%E9%9B%86%E5%90%88/" rel="tag"># Java集合</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.3k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <blockquote>
-<p>朱自清（1898~1948），原名自华，字佩弦，号秋实。江苏扬州人。“文学研究会”的早期成员，现代散文家、学者。原任清华大学教授，抗日战争爆发后转西南联合大学任教。在抗日民主运动的影响下，政治态度明显倾向进步。晚年积极参加反帝民主运动。他的散文，结构严谨，笔触细致，不论写景抒情，均能通过细密观察或深入体味，委婉地表现出对自然景色的内心感受。抒发自己的真挚感情，具有浓厚的诗情画意。主要作品有《毁灭》、《踪迹》、《背影》、《欧游杂记》、《伦敦杂记》等。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/22/test/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/22/test/" rel="next" title="背影--朱自清">
+                <i class="fa fa-chevron-left"></i> 背影--朱自清
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-	
-	<div>
- 
-</div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-	
-
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -677,10 +501,17 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dafc1577d2ca00a" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -688,6 +519,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzIwNS8yMzcwNQ=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -710,8 +550,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -791,6 +640,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap"><span class="nav-number">1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">1.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心方法"><span class="nav-number">1.3.</span> <span class="nav-text">核心方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -963,6 +828,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -991,6 +860,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
