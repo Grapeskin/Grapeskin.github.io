@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Joda," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;用来处理时间的有很多，有jdk自带的Date和Calendar，不过感觉并不是很好用，后面还有Apache封装的lang3包里面的DateUtils和DateFormatUtils，不过对于一些日期的计算还是不够好，后面发现了Joda，打算记录一下用法，研究了一下用法很多很全，就不一一写测试类了，等到要用到的时候再来看，这里就先记录有哪些用法。">
+<meta name="keywords" content="Joda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Joda时间处理工具类">
+<meta property="og:url" content="https:&#x2F;&#x2F;grapeskin.github.io&#x2F;2019&#x2F;11&#x2F;08&#x2F;Joda%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E7%B1%BB&#x2F;">
+<meta property="og:site_name" content="Grapeskin">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;用来处理时间的有很多，有jdk自带的Date和Calendar，不过感觉并不是很好用，后面还有Apache封装的lang3包里面的DateUtils和DateFormatUtils，不过对于一些日期的计算还是不够好，后面发现了Joda，打算记录一下用法，研究了一下用法很多很全，就不一一写测试类了，等到要用到的时候再来看，这里就先记录有哪些用法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-08T02:33:33.453Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'E8SM111QGB',
+      apiKey: 'd85713e02ada5d9e3de176a67ed965eb',
+      indexName: 'blog_index',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://grapeskin.github.io/2019/11/08/Joda时间处理工具类/"/>
+
+
+
+
+
+  <title>Joda时间处理工具类 | Grapeskin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+		
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Grapeskin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://grapeskin.github.io/2019/11/08/Joda%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LJY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grapeskin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Joda时间处理工具类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T10:01:37+08:00">
+                2019-11-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-08T10:33:33+08:00">
+                2019-11-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index">
+                    <span itemprop="name">工具类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;用来处理时间的有很多，有jdk自带的Date和Calendar，不过感觉并不是很好用，后面还有Apache封装的lang3包里面的DateUtils和DateFormatUtils，不过对于一些日期的计算还是不够好，后面发现了Joda，打算记录一下用法，研究了一下用法很多很全，就不一一写测试类了，等到要用到的时候再来看，这里就先记录有哪些用法。</p>
+<a id="more"></a>
+<h1 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h1><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;joda-time&lt;/groupId&gt;
+    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><p>Joda主要有DateTime、Instant、LocalDate、LocalTime、LocalDateTime这几个常用的日期类。</p>
+<ul>
+<li>Instant - 不可变的类，用来表示时间轴上一个瞬时的点（格林威治时间、带时区时间）</li>
+<li>DateTime - 不可变的类，用来替换JDK的Calendar类(本地时间、没有时区信息)</li>
+<li>LocalDate - 不可变的类，表示一个本地的日期，而不包含时间部分（没有时区信息）</li>
+<li>LocalTime - 不可变的类，表示一个本地的时间，而不包含日期部分（没有时区信息）</li>
+<li>LocalDateTime - 不可变的类，表示一个本地的日期－时间（没有时区信息）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Instant instant = new Instant();</span><br><span class="line">DateTime dateTime = new DateTime();</span><br><span class="line">LocalDate localDate = new LocalDate();</span><br><span class="line">LocalTime localTime = new LocalTime();</span><br><span class="line">LocalDateTime localDateTime = new LocalDateTime();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Instant: 2019-11-08T02:13:02.066Z</span><br><span class="line">DateTime: 2019-11-08T10:13:02.068+08:00</span><br><span class="line">LocalDate: 2019-11-08</span><br><span class="line">LocalTime: 10:13:02.161</span><br><span class="line">LocalDateTime: 2019-11-08T10:13:02.167</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="DateTime"><a href="#DateTime" class="headerlink" title="DateTime"></a>DateTime</h1><h2 id="常用构造函数"><a href="#常用构造函数" class="headerlink" title="常用构造函数"></a>常用构造函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour)</span><br><span class="line">DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute)</span><br><span class="line">DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond)</span><br><span class="line">DateTime(long instant)</span><br><span class="line">DateTime(Object instant)</span><br><span class="line">DateTime()</span><br></pre></td></tr></table></figure>
+<p>使用静态方法来创建对象<br>DateTime.now()<br>Instant.now()<br>…     </p>
+<h2 id="字符串与日期类型格式转换"><a href="#字符串与日期类型格式转换" class="headerlink" title="字符串与日期类型格式转换"></a>字符串与日期类型格式转换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(&quot;yyyy-MM-dd&apos;T&apos;hh:mm:ss.SSS&apos;Z&apos;&quot;);</span><br><span class="line">System.out.println(DateTime.parse(&quot;2019-11-08T01:42:26.051Z&quot;,dateTimeFormatter).plusHours(8));</span><br></pre></td></tr></table></figure>
+<h2 id="常用属性值获取"><a href="#常用属性值获取" class="headerlink" title="常用属性值获取"></a>常用属性值获取</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">getCenturyOfEra()               返回世纪单位(int)</span><br><span class="line">getYearOfCentury()              返回世纪年份(int)</span><br><span class="line">getYear()                       返回年(int)</span><br><span class="line">getWeekyear()                   返回对应年中周数(int)</span><br><span class="line">getMonthOfYear()                返回对应年的月数(int)</span><br><span class="line">getDayOfYear()                  返回对应年中天数(int)</span><br><span class="line">getDayOfMonth()                 返回对应月份中天数(int)</span><br><span class="line">getDayOfWeek()                  返回对应星期中天数(int)</span><br><span class="line">getHourOfDay()                  返回对应天中的小时(int)</span><br><span class="line">getMinuteOfDay()                返回对应天中的分钟数(int)</span><br><span class="line">getMinuteOfHour()               返回对应小时中的分钟数(int)</span><br><span class="line">getSecondOfDay()                返回对应天中的秒数(int)</span><br><span class="line">getSecondOfMinute()             返回对应分钟中的秒数(int)</span><br><span class="line">getMillis()                     返回毫秒数(int)</span><br><span class="line">getMillisOfDay()                返回对应天中的毫秒(int)</span><br><span class="line">getMillisOfSecond()             返回对应秒中的毫秒(int)</span><br><span class="line">getHourOfDay()                  返回对应天中的小时(int)</span><br><span class="line">toString(String pattern)        返回一个规定格式的String</span><br></pre></td></tr></table></figure>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">1. plus/minus开头的方法（比如：plusDay, minusMonths）：用来返回在DateTime实例上增加或减少一段时间后的实例</span><br><span class="line">plus(long duration)             增加指定毫秒数并返回</span><br><span class="line">plusYears(int years)            增加指定年份并返回</span><br><span class="line">plusMonths(int months)          增加指定月份并返回</span><br><span class="line">plusWeeks(int weeks)            增加指定星期并返回</span><br><span class="line">plusDays(int days)              增加指定天数并返回</span><br><span class="line">plusHours(int hours)            增加指定小时并返回</span><br><span class="line">plusMinutes(int minutes)        增加指定分钟并返回</span><br><span class="line">plusSeconds(int seconds)        增加指定秒数并返回</span><br><span class="line">plusMillis(int millis)          增加指定毫秒并返回</span><br><span class="line">-与之相反的是minus前缀的 plus是增加 minus是减少</span><br><span class="line"></span><br><span class="line">2. with开头的方法：用来返回在DateTime实例更新指定日期单位后的实例</span><br><span class="line">withCenturyOfEra(int centuryOfEra)  更新时间世纪单位并返回</span><br><span class="line">withYearOfCentury(int yearOfCentury)更新世纪年并返回</span><br><span class="line">withYear(int year)              更新时间年并返回</span><br><span class="line">withWeekyear(int weekyear)      更新时间周数并返回</span><br><span class="line">withMonthOfYear(int monthOfYear)更新时间月份并返回</span><br><span class="line">withDayOfYear(int dayOfYear)    更新时间天数并返回</span><br><span class="line">withDayOfMonth(int dayOfMonth)  更新时间天数并返回</span><br><span class="line">withDayOfWeek(int dayOfWeek)    更新时间天数并返回</span><br><span class="line">withHourOfDay(int hour)         更新时间小时并返回</span><br><span class="line">withMinuteOfHour(int minute)    更新时间分钟并返回</span><br><span class="line">withSecondOfMinute(int second)  更新时间秒数并返回</span><br><span class="line">withMillisOfSecond(int millis)  更新时间毫秒并返回</span><br><span class="line">withMillisOfDay(int millis)     更新时间毫秒并返回</span><br><span class="line">withTimeAtStartOfDay()          获取当天最早时间</span><br><span class="line"></span><br><span class="line">3. 判断DateTime对象大小状态的一些操作方法</span><br><span class="line">compareTo(DateTime d)           比较两时间大小 时间大于指定时间返回 1 时间小于指定时间返回-1 相等返回0</span><br><span class="line">equals(DateTime d)              比较两时间是否相等</span><br><span class="line">isAfter(long instant)           判断时间是否大于指定时间</span><br><span class="line">isAfterNow()                    判断时间是否大于当前时间</span><br><span class="line">isBefore(long instant)          判断时间是否小于指定时间</span><br><span class="line">isBeforeNow()                   判断时间是否小于当前时间</span><br><span class="line">isEqual(long instant)           判断时间是否等于指定时间</span><br><span class="line">isEqualNow()                    判断时间是否等于当前时间</span><br><span class="line"></span><br><span class="line">4. jdk date互转</span><br><span class="line">DateTime dt = new DateTime(new Date()); jdk的date转换为DateTime</span><br><span class="line">Date jdkDate = dt.toDate()      转换为jdk的date</span><br><span class="line"></span><br><span class="line">5. 属性</span><br><span class="line">addToCopy(int value)            日期属性增加value并返回datetime</span><br><span class="line">setCopy(int value)              日期属性替换成value并返回datetime</span><br><span class="line">withMaximumValue()              返回日期属性最大值的datetime</span><br><span class="line">withMinimumValue()              返回日期属性最小值的datetime</span><br><span class="line">roundFloorCopy()                返回日期属性最小值的datetime</span><br><span class="line">roundCeilingCopy()              返回日期属性最大值的datetime</span><br><span class="line">get()                           返回日期属性值int类型</span><br><span class="line">getAsString()                   返回日期属性值String类型</span><br><span class="line">getAsShortText()                返回日期属性值String类型简写</span><br><span class="line">getAsText()                     返回日期本地属性值String类型，如“星期五”</span><br><span class="line">isLeap()                        判断是闰年闰月的方法</span><br><span class="line">getMaximumValue                 获取属性值的最大值返回int</span><br><span class="line">getMinimumValue                 获取属性值的最小值返回int</span><br></pre></td></tr></table></figure>
+
+<h1 id="其他几个类型也类似"><a href="#其他几个类型也类似" class="headerlink" title="其他几个类型也类似"></a>其他几个类型也类似</h1><h1 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Days.daysBetween(ReadableInstant start, ReadableInstant end)     获取两日期相差的天数</span><br><span class="line">Hours.hoursBetween(ReadableInstant start, ReadableInstant end)    获取两日期相差的小时数</span><br><span class="line">Minutes.minutesBetween(ReadableInstant start, ReadableInstant end)  获取两日期相差的分钟数</span><br><span class="line">Months.monthsBetween(ReadableInstant start, ReadableInstant end)   获取两日期相差的月数</span><br><span class="line">Seconds.secondsBetween(ReadableInstant start, ReadableInstant end)  获取两日期相差的秒数</span><br><span class="line">Weeks.weeksBetween(ReadableInstant start, ReadableInstant end)    获取两日期相差的周数</span><br><span class="line">Years.yearsBetween(ReadableInstant start, ReadableInstant end)    获取两日期相差的年数</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+ 
+ <div style="text-align:center;color: #ccc;font-size:14px;">-------------已经触及到我的底线&nbsp;&nbsp;<i class="fa fa-paw"></i>&nbsp;&nbsp;非常感谢您的阅读-------------</div>
+ 
+</div>
+
+    
+
+    
+
+    
+	
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Joda/" rel="tag"># Joda</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/07/SpringBoot%E9%9B%86%E6%88%90logback%E3%80%81mybatis-generator/" rel="next" title="SpringBoot集成logback、mybatis-generator">
+                <i class="fa fa-chevron-left"></i> SpringBoot集成logback、mybatis-generator
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/08/Nginx%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2/" rel="prev" title="Nginx配置部署">
+                Nginx配置部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dafc1577d2ca00a" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzIwNS8yMzcwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="LJY" />
+            
+              <p class="site-author-name" itemprop="name">LJY</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Grapeskin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1229738142@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入依赖"><span class="nav-number">1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DateTime"><span class="nav-number">2.</span> <span class="nav-text">DateTime</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用构造函数"><span class="nav-number">2.1.</span> <span class="nav-text">常用构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串与日期类型格式转换"><span class="nav-number">2.2.</span> <span class="nav-text">字符串与日期类型格式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用属性值获取"><span class="nav-number">2.3.</span> <span class="nav-text">常用属性值获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">2.4.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他几个类型也类似"><span class="nav-number">3.</span> <span class="nav-text">其他几个类型也类似</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展方法"><span class="nav-number">4.</span> <span class="nav-text">扩展方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+	<!--音乐播放器-->
+	<div id="music163player">
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=430 src="//music.163.com/outchain/player?type=0&id=3041300933&auto=0&height=76"></iframe>
+	  
+	</div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LJY</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">11.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      总访客数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
