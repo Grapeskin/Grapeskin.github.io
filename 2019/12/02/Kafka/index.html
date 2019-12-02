@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="领域模型," />
+  <meta name="keywords" content="Kafka," />
 
 
 
@@ -86,18 +86,16 @@
 
 
 
-<meta name="description" content="主要就DTO、VO、BO、DO、PO的理解，加上网上搜索的一席资料，随便画的一个在mvc分层体系中领域对象的转化，每个领域都返回自己领域的对象，维护起来就比较容易。">
-<meta name="keywords" content="领域模型">
+<meta name="description" content="Kafka集群搭建 目前搭建三个节点123master 192.168.133.128dn1     192.168.133.132dn2     192.168.133.133 下载安装包，解压放在&#x2F;usr&#x2F;local下 编辑配置文件主要修改三个地方12345vim &#x2F;usr&#x2F;local&#x2F;kafka_2.12-2.3.0&#x2F;config&#x2F;server.properties修改broker.id,">
+<meta name="keywords" content="Kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web领域模型">
-<meta property="og:url" content="https:&#x2F;&#x2F;grapeskin.github.io&#x2F;2019&#x2F;11&#x2F;07&#x2F;Web%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B&#x2F;">
+<meta property="og:title" content="Kafka">
+<meta property="og:url" content="https:&#x2F;&#x2F;grapeskin.github.io&#x2F;2019&#x2F;12&#x2F;02&#x2F;Kafka&#x2F;">
 <meta property="og:site_name" content="Grapeskin">
-<meta property="og:description" content="主要就DTO、VO、BO、DO、PO的理解，加上网上搜索的一席资料，随便画的一个在mvc分层体系中领域对象的转化，每个领域都返回自己领域的对象，维护起来就比较容易。">
+<meta property="og:description" content="Kafka集群搭建 目前搭建三个节点123master 192.168.133.128dn1     192.168.133.132dn2     192.168.133.133 下载安装包，解压放在&#x2F;usr&#x2F;local下 编辑配置文件主要修改三个地方12345vim &#x2F;usr&#x2F;local&#x2F;kafka_2.12-2.3.0&#x2F;config&#x2F;server.properties修改broker.id,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https:&#x2F;&#x2F;grapeskin.github.io&#x2F;.io&#x2F;&#x2F;springmvc.png">
 <meta property="og:updated_time" content="2019-12-02T11:10:30.108Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;grapeskin.github.io&#x2F;.io&#x2F;&#x2F;springmvc.png">
 
 
 
@@ -127,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://grapeskin.github.io/2019/11/07/Web领域模型/"/>
+  <link rel="canonical" href="https://grapeskin.github.io/2019/12/02/Kafka/"/>
 
 
 
 
 
-  <title>Web领域模型 | Grapeskin</title>
+  <title>Kafka | Grapeskin</title>
   
 
 
@@ -308,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://grapeskin.github.io/2019/11/07/Web%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://grapeskin.github.io/2019/12/02/Kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LJY">
@@ -325,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Web领域模型</h1>
+          <h1 class="post-title" itemprop="name headline">Kafka</h1>
         
 
         <div class="post-meta">
@@ -337,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T08:47:25+00:00">
-                2019-11-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-02T10:25:40+00:00">
+                2019-12-02
               </time>
             
 
@@ -372,8 +370,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
                   </a>
                 </span>
 
@@ -410,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  71 字
+                  316 字
                 </span>
               
 
@@ -447,10 +445,16 @@
       
 
       
-        <p>主要就DTO、VO、BO、DO、PO的理解，加上网上搜索的一席资料，随便画的一个在mvc分层体系中领域对象的转化，每个领域都返回自己领域的对象，维护起来就比较容易。</p>
-<a id="more"></a>
-<h1 id="Java-Web领域模型"><a href="#Java-Web领域模型" class="headerlink" title="Java Web领域模型"></a>Java Web领域模型</h1><p><img src="/.io//springmvc.png" alt="领域"></p>
-
+        <a id="more"></a>
+<h1 id="Kafka集群搭建"><a href="#Kafka集群搭建" class="headerlink" title="Kafka集群搭建"></a>Kafka集群搭建</h1><ul>
+<li>目前搭建三个节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">master 192.168.133.128</span><br><span class="line">dn1     192.168.133.132</span><br><span class="line">dn2     192.168.133.133</span><br></pre></td></tr></table></figure></li>
+<li>下载安装包，解压放在/usr/local下</li>
+<li>编辑配置文件主要修改三个地方<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/kafka_2.12-2.3.0/config/server.properties</span><br><span class="line">修改broker.id,每个节点的id，zookeeper集群管理，这里设置1,2,3</span><br><span class="line">修改listener,将localhost改为当前主机名</span><br><span class="line">修改log.dirs为/usr/local/kafka_2.12-2.3.0/logs/00，可以设置为别的目录，用来存放日志</span><br><span class="line">修改zookeeper.connect为 master:2181,dn1:2181,dn2:2181</span><br></pre></td></tr></table></figure>
+<h1 id="运行kafka"><a href="#运行kafka" class="headerlink" title="运行kafka"></a>运行kafka</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在启动kafka之前要先启动zookeeper，因为kafka集群需要zookeeper来管理</span><br><span class="line">zkServer.sh start</span><br><span class="line">cd /usr/local/kafka_2.12-2.3.0/</span><br><span class="line">bin/kafka-server-start.sh config/server.properties &amp;</span><br></pre></td></tr></table></figure>
+<h1 id="创建Topic"><a href="#创建Topic" class="headerlink" title="创建Topic"></a>创建Topic</h1>放个官方网站的链接吧，这些没啥好写的了<br><a href="http://kafka.apache.org/quickstart" target="_blank" rel="noopener">http://kafka.apache.org/quickstart</a></li>
+</ul>
+<p>-碰到的问题，创建一个消费者组，使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.开启生产者</span><br><span class="line">bin/kafka-console-producer.sh --broker-list master:9092 --topic youge</span><br><span class="line">2.开启组1消费者</span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server master:9092 --topic youge --group group1</span><br><span class="line">3.开启组2消费者</span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server master:9092 --topic youge --group group2</span><br><span class="line">4.生产者生产数据</span><br><span class="line">结果：组1收到消息，组2收到消息</span><br><span class="line"></span><br><span class="line">5.开启两个组1消费者</span><br><span class="line">结果：只有一个消费者消费了消息</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -475,7 +479,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B/" rel="tag"># 领域模型</a>
+            <a href="/tags/Kafka/" rel="tag"># Kafka</a>
           
         </div>
       
@@ -488,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/07/Swagger/" rel="next" title="SpringBoot系列-Swagger集成">
-                <i class="fa fa-chevron-left"></i> SpringBoot系列-Swagger集成
+              <a href="/2019/11/29/Spark%E7%AE%97%E5%AD%90/" rel="next" title="Spark算子">
+                <i class="fa fa-chevron-left"></i> Spark算子
               </a>
             
           </div>
@@ -497,10 +501,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/07/SpringBoot%E9%9B%86%E6%88%90logback%E3%80%81mybatis-generator/" rel="prev" title="SpringBoot集成logback、mybatis-generator">
-                SpringBoot集成logback、mybatis-generator <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -665,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Web领域模型"><span class="nav-number">1.</span> <span class="nav-text">Java Web领域模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka集群搭建"><span class="nav-number">1.</span> <span class="nav-text">Kafka集群搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行kafka"><span class="nav-number">2.</span> <span class="nav-text">运行kafka</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Topic"><span class="nav-number">3.</span> <span class="nav-text">创建Topic</span></a></li></ol></div>
             
 
           </div>
